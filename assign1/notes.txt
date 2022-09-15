@@ -1,0 +1,45 @@
+﻿General Notes: 
+* “bin” stands for binary 
+* ~ = home for user
+* / = root of the file system 
+* ‘history’ command gives you a list of the last commands you have used 
+Bash/Terminal Commands Outside of Emacs:
+* ‘C-u’ clears current line 
+* Lab 1.5: Exploring the operating system outside Emacs
+1. If we do the command “which mv” and “which sh”, we can see that this outputs :/usr/local/cs/bin/mv” and “/usr/bin/sh”, respectively. 
+2. In order to find what executable programs in /usr/bin have names that are exactly two characters long and end in r, we use the command ‘ find /usr/bin -regex "/usr/bin/.r" ’ and the output is: 
+/usr/bin/ar
+/usr/bin/pr
+/usr/bin/tr
+
+
+Now, to find out what they do, we use the command ‘man’ on each of them, so ‘man ar’, ‘man pr’, and ‘man tr.’ From this, we get the following: 
+* ar: modify, create, and extract from archives where an archive is a single file holding a collection of other files in a structure that makes it possible to retrieve the original individual files. 
+* pr: convert text files for printing: paginate or columnates FILE(s) for printing or when there is no file, then read standard input 
+* tr: translate, squeeze, and/or or delete characters from standard input, writing to standard output 
+
+
+3. When we do ‘ls -l /usr/local/cs/bin/emacs’ we are given something of the form like this: “/usr/local/cs/bin/emacs -> ../emacs-27.2/bin/emacs-27.2” and here, this essentially saying that the symbolic link, emacs, is pointing to “emacs-27.2/bin/emacs-27” and this is the file that is actually executed. 
+4. The version number of the /usr/bin/gcc program is 8.5.0 whereas the version number of the plain gcc program is 11.2.0. They are different programs because when we look for ‘/usr/bin/gcc’, we are searching for this specific path. On the other hand, looking for just ‘gcc’ will find the first fcc available in the current path I am in, therefore, they might not be the same and in this case, they are not. 
+5. I used the command, ‘man chmod’, to find this out and I found out that in terms of permission, u+sx completely grabs ownership since there exists a user bit while o-w removes others’ permission to write to the file,
+6. I used the command “/usr/local/cs -type d -mtime -28 | wc -l” and as a result, I ended up modifying many different directories. 
+7. I used these commands to find how many of these directories are symbolic links: “d /usr/bin/”, “which find/usr/bin/find”, and “find -type l | wc”. I ended up finding 250 symbolic links. 
+8. I used this command: “ls /usr/lib64 -trAl | grep -e "^-" | head -1 | tr " " "\n" | tac | head -1” and I located the oldest file which was “libbz2.so.1.0.6.” 
+9. In Emacs, these commands have transpose in their name:
+   1. M-x transpose-chars
+   2. M-x transpose-lines
+   3. M-x transpose-sexps
+   4. M-x transpose-words
+   5. M-x transpose-sentences
+   6. M-x transpose-paragraphs
+   7. M-x transpose-regions
+   8. C-h C-s transpose 
+10. The Emacs yank function is C-y and it puts whatever back that was on the kill ring. If a line was killed and done so with C-k, then C-y would put this back on the line. This is almost like a cut and paste. 
+11. Here, I just used the man ls command to check and the difference turns out to be that dired can do more things. It can open and edit files while ls -l can only view them and the file list in general. 
+12. I used many different commands here and these included: 
+   1. ‘Pstree -s’ and ‘man pstree’: These were both used to find the ancestors
+   2. ‘ps’: this found the current process 
+   3. ‘Pstree -s currentProcessNumber’ would output the following tree which was final: 
+systemd ───sshd───sshd───sshd───bash─┬─emacs───{emacs}
+                                    ├─man───less
+                                    └─pstree

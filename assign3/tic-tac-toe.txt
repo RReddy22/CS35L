@@ -1,0 +1,92 @@
+﻿Setup Option in a Local Development Environment:
+1. Download Node.js (in my case, I had an older version of node installed, so I needed to reinstall a new version. Even after I reinstalled a new version, however, the path to the new version was very different from the path to the old version, so I needed to rename the current PATH to the new version in order to render the new version of node. Then and only then would step 2’s command work).   
+2. Use ‘npx create-react-app my-app’ to start the app in a terminal 
+3. Delete all files in the src/ folder of the new project and index.css and index.js along with the source code for each. 
+4. Now, run ‘npm start’ and the browser should open an empty tic-tac-toe game board
+
+
+Passing Data Through Props: 
+1. Add this.props.value to the render method to show that value 
+
+
+Making an Interactive Component:
+1. Put this piece of code inside the render method in order for React to register when you ‘click.’ <button className="square" onClick={function() { console.log('click'); }}>
+2. Add a constructor to the class to initialize the state of the Square class that looks like this
+
+
+constructor(props) {
+   super(props);
+   this.state = {
+     value: null,
+   };
+
+
+Lifting State Up:
+1. Currently, each Square component maintains the game’s state. To check for a winner, we’ll maintain the value of each of the 9 squares in one location.
+2. Instead, the best approach is to store the game’s state in the parent Board component instead of in each Square
+3. Add a constructor to the Board and set the Board’s initial state to contain an array of 9 nulls corresponding to the 9 squares:
+
+
+Function Components: 
+1. We can write a function taking input as “props” and return whatever we want rendered. 
+2. We want to replace the Square class with the function that renders what we want and we want to change this.props to props.
+
+
+Taking Turns: 
+1. We now want to make sure that we are able to put O’s on our board. We want to do this by putting X to be the first move as a default state by using “XisNext” as a boolean variable that starts off as true. Now, we can change turns from X to O. 
+
+
+Declaring a Winner: 
+1. Create the function below that shows all possible states of winning stored in an array 
+
+
+function calculateWinner(squares) {
+  const lines = [
+    [0, 1, 2],
+    [3, 4, 5],
+    [6, 7, 8],
+    [0, 3, 6],
+    [1, 4, 7],
+    [2, 5, 8],
+    [0, 4, 8],
+    [2, 4, 6],
+  ];
+
+
+  for (let i = 0; i < lines.length; i++) {
+    const [a, b, c] = lines[i];
+    if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
+      return squares[a];
+    }
+  }
+  return null;
+}
+
+
+Adding Time Travel:
+* We need to do the following in order to store a History of Moves. We do this by storing arrays that have the history concatenated to each of its past histories so it can build itself up again. 
+
+
+Lifting State Up, Again:
+
+
+constructor(props) {
+   super(props);
+   this.state = {
+     history: [{
+       squares: Array(9).fill(null),
+     }],
+     xIsNext: true,
+   };
+
+
+We’ll update the Game component’s render function to use the most recent history entry to determine and display the game’s status:
+
+
+Showing the Past Moves:
+1. Under the render method, we need to add  something that tells us which move to go to as well as if we want to go to the start of the game. This is done by “const moves = history.map((step, move) =>”. 
+
+
+Implementing Time Travel:
+1. In order to implement time travel, we added that stepNumber is 0 as the initial state in Game’s constructor:
+2. I then updated the jumpTo function to update the properties marker, ID, and board. This way, the game can go back to exactly where it was during that turn. Here, they can reduce the piece they want to move.

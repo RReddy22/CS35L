@@ -1,0 +1,17 @@
+﻿Section 1: Changes Made to Implement the App
+
+
+1. Under the Game Class’ constructor, I added a variable called “lastMove” and initialized it to -1. This was so I could use this for a bunch of operations later on. This could also be how I stored the previous location of a piece. 
+2. I, then, used a conditional statement to determine if we were still playing tic tac toe and had not played less than 6 moves. If this was the case, then I just did a return statement to make the game keep behaving in the way it was before. 
+3. If the above case in #2 was not true then I had a separate “if” statement asking if the stepNumber was greater than or equal to 6. Everything below here is the ​​chorus-lapilli game
+4. We now continue using conditional statements and checking who’s turn it is and if we can properly place that particular piece (X or O) down on a certain square. 
+5. We also have to account for trying to move a piece to a square that it is currently on. 
+6. My original code was not completely working properly when there was a bug in the middle of the board. Particularly, square 4 was having a bug, so I decided to check when the particular square on 4 is NOT false and the spot is equal to this last move. IN addition, I check if the square we are currently on is empty and if the last move was on 4. If this was the case, then we make the current square equal to the last one and set the last one equal to null. Then, we reset the previous location using the lastMove variable. Afterwards, we concatenate the history to reflect the updated board and squares. Then we also change whose move it is (from X to O or from O to X depending on whose move it originally was. 
+7. Otherwise, we want to reset our lastMove variable to the original state we had it in which was -1. In other words, we want to reset our previous location. This would be the alternative case for 6. 
+8. We want to now check all the following acceptable moves to make and update out board and all of the variables we have associated with the game in order to properly reflect the code in React and in the browser itself. 
+9. The code below is all the same! 
+Section 2: Documentation on how to interact with the app from the browser
+1. Once you launch the web app, you should be able to see an empty Tic Tac Toe Game Board that says, “Next player: X” and also says “1. Go to game start” below it on a button. 
+2. Now, for the first 6 moves of the game, you would play a normal two player Tic-Tac-Toe game (alternating between player X and player O). 
+3. Once the sixth letter is placed down, then the ​​chorus-lapilli game begins and we now move one of our existing pieces from the board to another square directly adjacent in a horizontal, vertical, or diagonal manner. 
+4. ^We can do the above by clicking on the desired piece we want to move, then clicking on the square that we want to move it to. For example, if we were eplayer X and we had an X on the bottom left and we wanted to move it to the center which is empty, then we would click our X on the bottom left and then click the center square.

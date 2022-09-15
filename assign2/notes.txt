@@ -1,0 +1,19 @@
+Exercise 2.1 
+
+1. The expression to compute 7^(5^4) is “(expt 7 (expt 5 4) )”
+
+2. The expression to determine how many bits to store 7^(5^4) is: “(ceiling ( * (expt 5 4) (log 7 2 ) ) )”
+
+3. When you do ‘C-h k C-h k’, this brings us to the description for what ‘C-h k’ does. Since ‘C-h k’ itself brings us to the description of whatever command comes after it, then this command will bring us to the description of what ‘C-h k’ does.  
+
+4. When you do ‘C-h k M-SPC’ this brings us to the description for what ‘M-SPC’ does. Since ‘C-h k’ itself brings us to the description of whatever command comes after it, then this command will bring us to the description of what ‘M-SPC’ does. The way that ‘M-SPC’ works is that its main function is “just-one-space'' and it has a parameter/argument that is “n.” It deletes all spaces and tabs are points and leaves one space (or N spaces). If N is < 0, it deletes newlines too and leaves -N spaces. 
+
+5. The general way to do M-SPC is to use ‘M-x eval-expression (just-one-space)’ and that general function is cycle-spacing just as specified. You can also do it by ‘M-:’ (just-one-space) and you need to make sure that you have the spaces or something highlighted/marked beforehand. 
+
+Homework: Python scripting
+ 
+1. When this script is invoked on an empty file like /dev/null, there is an error message and it is an index error in particular. This is because the script cannot index over a file that is empty and it cannot get a random line in a null file.
+ 
+2. When this script is invoked with Python 3 rather than Python 2, this gives a syntax error. This is because whatever is proper syntax in python 2 might not necessarily be proper syntax in python 3. 
+
+3. When my shuf.py script is invoked with Python 2 rather than Python 3, it gives a syntax error and this is because python 3 has updated and has things in it which python 3 does not. In this particular case, it says that there is a Non-ASCII character '\xe2' in the file.
