@@ -1,0 +1,15 @@
+﻿For the more open-ended search, I saw one commit history and this was it. Due to this, I began here and I used what the assignment said: “git diff --relative”. However, I decided to do a git log of this to get more information. 
+* Once I did this (“git log git diff --relative”), I noticed two commits and one of them was related to segfaults which is what the assignment wanted us to see. 
+* This specific commit had a merge, so I decided to check its hashes like I did in #7 on Lab A. 
+* I noticed that one of the hashes mentioned NULL values and checked for dereferencing which is related to segfaults
+* The specific Merge I saw was ae9e6ef35e 8174627b3d
+
+
+In order to compare the hash with its previous one, I did the git diff command (to check the difference) and did the original commit number follow by one before it:
+* “git diff 8174627b3d 8174627b3d~1”
+* After the above command, I used git show 8174627b3d to see what was here and it showed what we wanted to see. The result of this was: 
+   * Author: Đoàn Trần Công Danh <congdanhqx@gmail.com>
+
+
+RESULTS: 
+* 8174627b3d was the commit number or the specific commit that was created by the author, Đoàn Trần Công Danh, and this was the resolution to this.

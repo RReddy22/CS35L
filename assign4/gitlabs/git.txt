@@ -1,0 +1,41 @@
+﻿After using the command “git branch”, the result was the following when I did it in my repository: 
+
+
+* master
+
+
+On the other hand, when I typed the exact same command when I was in ~eggert/src/github/git, this was the result: 
+
+
+  maint
+* master
+  next
+  seen
+  todo
+
+
+The result of this is that there exist more branches in ~eggert/src/github/git compared to my local directory. 
+
+
+We can also use the command again but add a ‘-a’ option, so the command is now “git branch -a”. The result of doing this in ~eggert/src/github/git is as follows: 
+
+
+  maint
+*master
+  next
+  seen
+  todo
+  remotes/origin/HEAD -> origin/master
+  remotes/origin/main
+  remotes/origin/maint
+  remotes/origin/master
+  remotes/origin/next
+  remotes/origin/seen
+  remotes/origin/todo
+
+
+Similarly, if we do this locally, we can also say that both have the “origin/master”. In addition, there are different versions when looking at each of the repositories. The date of the last commit for the master branch is November 2, 2021, however in ~eggert/src/github/git, it is from October 25, 2021. 
+* The version that is the most updated as of now for the master branch is “v2.34.0-rc1”.
+
+
+Overall, there are a lot of remote branches in ~eggert/src/github/git as compared to my local directory.

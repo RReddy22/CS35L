@@ -1,0 +1,31 @@
+﻿1. grep -rnwl . -e "Even newspaper reports present contradictory information."
+* To find which file in the tz directory had that line
+
+
+2. grep -n ./northamerica -e "Even newspaper reports present contradictory information."
+* finds line number of this string 
+
+
+3. git blame ./northamerica | awk "NR==896"
+* Prints out the line number where this is time 
+
+
+4. git reset --hard commitNumber~1
+* Goes back 1 commit behind the current commit 
+* The ‘commitNumber’ should be replaced with the commit hash that should look something like this: “c8f960ec7.”
+
+
+5. grep -n ./northamerica -e "Even newspaper reports present contradictory information."
+* Checks if the line is still here in this previous commit
+
+
+6. If it is, then go back to the previous commit until the last time it was edited until there is no output when you do “grep -n ./northamerica -e "Even newspaper reports present contradictory information."” command. 
+* If there is indeed no output, then the commit after the current one was the original time the line was introduced. In this case, you do not need to do anything else since you have found the last author when this was first introduced. 
+* If there is an output, then there is another commit before the current one that had the output we are looking for. In this case, repeat steps 4 and 5. 
+
+
+In our case after going through all these steps, we found that Arthur David Olson was the original author per the time, date, and other details below” 
+
+
+“c344c562c (Arthur David Olson 2006-01-30 08:59:12 -0500  691) 
+540:# and writes ``Even newspaper reports present contradictory information.''
