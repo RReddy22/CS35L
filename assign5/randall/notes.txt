@@ -1,0 +1,61 @@
+﻿Definitions: 
+Tune- The improvement of system performance 
+Refactor- The process of restructuring existing computer code - changing the factoring - without changing its external behavior. 
+        Factoring- AKA decomposition is breaking a complex problem or system into smaller parts that are easier to conceive, understand, program, and maintain. 
+Test Driven Development- One part is where you write tests before you code, however other parts include writing only the code necessary to pass a flying test, refactoring, and keeping the red-green-refactor cycles short and steady. 
+Modular Code- Code that is separated into independent modules 
+_____________________________________________________
+
+
+The very first thing I did was to create a target for check and I did this in the Makefile. The test I created was “ ./randall 2 | wc -c | grep -Fxq "2" ” which checks for if the output is the correct length. Specifically, it looked like this: 
+
+
+check: default
+        ./randall 2 | wc -c | grep -Fxq "2" \
+        && echo "success" || echo "failure"
+
+
+The part that says “&& echo "success" || echo "failure” ” was to ensure that it would print out success when it was a success and failure when it was a failure. 
+
+
+Next, I put the files we needed (specifically the .c ones) in the target for “randall.” This is so that whenever we compiled the makefile using “make check” or “make”, we could include these files in the compilation. In addition, I then included header files in the necessary source code and I additionally included other files and C-libraries where necessary. This was so I could modularize the files and organize them into the files that they best fit in. 
+* I ran “make check” to ensure I did all of this correctly and If I received a “success”, then it was right 
+
+
+To implement the options, I looked at the “getopt” documentation and used a similar loop to what they used. More specifically, in my options.c file, I used this code structure to take an input and to have different behavior based on what the input is (i.e. if its a “-o”, “-i”, and what specific option I was trying to look at). 
+
+
+ while ((c = getopt(argc, argv, options)) != -1) {
+            switch (c) {
+            case 'i':
+              if (strcmp(optarg, "rdrand") == 0) 
+                      …
+                  if (strcmp(optarg, "mrand48_r") == 0)
+                —
+                  if (optarg[0] == '/') 
+                …
+            case 'o':
+        …
+
+
+I also used the “optarg” variable that is included with “getopt” and to use this, I did “#include <unistd.h>.” 
+* As a side note, whenever I found something that I did not understand when writing my code, I made sure to comment so that I could understand what I was implementing if I had to go back and debug. 
+
+
+Moving to the options.c file, I used “polymorphism” in a way, but obviously, since C is not an Object Oriented language, I implemented an output function a little differently by just making a separate output1 and output2 function. One was for the -o option and I even used a helper function writeBytes for the -o option when we were just considering the decimal integer, “N.”
+
+
+For the hardware.c file, I did not really change it since the implementation was exactly as we needed and in the spec, it stated that for “rdrand” which was the “hardware” random-number generation that this option was the default.
+
+
+For the software.c file, I changed it a little in the unsigned long long software_rand64 (void) function that is supposed to return a random value, using software operations. I first read into the size of a character buffer and checked if x was < 0, otherwise I would return it. A summary of the little code I used for this is shown down below: 
+
+
+unsigned long long int x;
+if (fread (&x, sizeof (char), (sizeof x) / (sizeof (char)), urandstream) < 0)
+abort ();
+return x;
+
+
+Finally, when looking at the Makefile, I needed to really check that the compilation was working properly as I definitely got errors throughout my testing and debugging process. Something that I did as a result of these difficulties was to change the targets to object files (.o files). So for example, “options.o” target would depend on “options.c” and “options.h” while the “output.o” target would depend on “output.c” and “output.h.”
+* Overall, this worked except I needed to make sure to include all the object files for the default target and I needed to make sure to include all the .c files files for randall.o given that randall.c was dependent on all the other .c files.
